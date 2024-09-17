@@ -11,7 +11,6 @@ openseadragon/
 node_modules/
 build/
 coverage/
-env/
 !env/README.md
 
 #docs
