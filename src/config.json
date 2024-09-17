@@ -32,7 +32,7 @@
     "client": {
         "dev": {
             /* The Viewer Domain Full URL including protocol NOTE: should end with a slash */
-            "domain": "http://localhost:8080/",
+            "domain": "http://optiplex01:9000/",
             /*
              The Path to the Viewer at given domain, so that 'domain+path+index.php' is the viewer index.
              Use null to let the system detect the path automatically.
@@ -44,19 +44,11 @@
                Available are 'path' (image server URL) and 'data' (image identifier such as image path).
                Server URL can be relative, if on the same server domain as the viewer.
              */
-            "image_group_server": "/iipsrv/iipsrv.fcgi",
-            "image_group_protocol": "`${path}?Deepzoom=${data}.dzi`", //one-liner expression
-            "image_group_preview": "`${path}?Deepzoom=${data}_files/0/0_0.jpg`", //one-liner expression
-            /*
-               Data Group Server for visualized data, specifies the server and protocol as javascript one-liner
-               resulting in a string. Available are 'path' (image server URL) and 'data'
-               (string array of image identifiers such as image path).
-               Server URL can be relative, if on the same server domain as the viewer.
-
-               In case of parameter fetchAsync = true, data is a single string, not an array!
-             */
-            "data_group_server": "/iipsrv/iipsrv.fcgi",
-            "data_group_protocol": "`${path}#DeepZoomExt=${data.join(\",\")}.dzi`", //one-liner expression
+            "image_group_server": "http://optiplex01:8080",
+            "image_group_protocol": "`${path}/v3/batch/info?slides=${data}`",
+            "image_group_preview": "`${path}/v3/batch/thumbnail/max_size/250/250?slides=${data}`",
+            "data_group_server": "http://optiplex01:8080",
+            "data_group_protocol": "`${path}/v3/batch/info?slides=${data.join(\",\")}`",
             // Can be overridden by params.headers
             "headers": {},
             /* Cookie Setup */

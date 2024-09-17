@@ -356,6 +356,50 @@ window.OSDAnnotations = class extends XOpatModuleSingleton {
 		return imported;
 	}
 
+
+    /**
+     * Get anotation data from a remote API - written by chatGPT: https://chatgpt.com/share/66e341a0-591c-8003-960f-5a83cdfe753b
+     * Probably needs a lot of work
+     */
+    getSlideIdFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('slides'); // 'slides' is the key in the query string
+    }
+    async importFromAPI() {
+        const slideId = this.getSlideIdFromURL() 
+        if (!slideId) {
+            console.error("Slide ID is missing in the URL or session.");
+            Dialogs.show("Slide ID is missing. Please check the URL.", 5000, Dialogs.MSG_ERR);
+            return;
+        }
+        const apiUrl = "https://your-api-endpoint.com/file?slides=${slideId}"; // Replace with the actual API URL
+        const _this = this;
+        
+        if (!options?.format) options.format = "geo-json";
+        
+        try {
+            // Fetch the data from the remote API
+            const response = await fetch(apiUrl);
+
+            // Check if the response is successful
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // Assuming the response contains the file data in JSON format
+            const fileData = await response.json(); // Adjust according to the actual response format
+
+            // Call the same import function with the file data
+            await _this.context.import(fileData, this._ioArgs, false);
+
+            Dialogs.show("File imported from remote API.", 1500, Dialogs.MSG_INFO);
+
+        } catch (error) {
+            console.error("Failed to fetch and import file:", error);
+            Dialogs.show("Failed to fetch and import the file from API.", 5000, Dialogs.MSG_ERR);
+        }
+    }
+
 	/**
 	 * Force the module to export additional properties used by external systems
 	 * @param {string} value new property to always export

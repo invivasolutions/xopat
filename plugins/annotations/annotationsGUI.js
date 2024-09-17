@@ -206,9 +206,14 @@ ${modeOptions.join("")}</div>`, 'draw');
 	&emsp;&emsp;
 	<button id="downloadPreset" onclick="${this.THIS}.exportToFile(false, true);return false;" class="btn">Download presets.</button>&nbsp;
 	<button id="downloadAnnotation" onclick="${this.THIS}.exportToFile(true, true);return false;" class="btn">Download annotations.</button>&nbsp;
-</div>`);
+    <br><br>
+        <!-- New button to import from API -->
+        <button id="importFromAPIButton" onclick="${this.THIS}.importFromAPI();" class="btn">Import from API</button>&nbsp;
+    </div>`);
 		this.annotationsMenuBuilder = new UIComponents.Containers.RowPanel("available-annotations");
 
+        
+        
 		//trigger UI refreshes
 		this.updateSelectedFormat(this.exportOptions.format);
 		this.updatePresetsHTML();
