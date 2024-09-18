@@ -2,11 +2,14 @@
 Just a quick list of missing functionality - intended more as notes than a definitive list of things to do
 
 ## Security
-### mvp
-At present this only passes on known variables to the underlying system - so `slides=xxxx` gets passed down to the wsi-server, but not say `token=xxxx`. This seems to be the simplest security option as we can then use existing nhinxcode to
-validate every request to both this and the underlying wsi-service.
+### CORS 
+At the moment the CORS is wide open on both the anotations API and the WSI-Service interface. This is largely because the client browser generates the requests to these end points, rather than them being internal to docker, and I don't know how to do it "properly"
 
-### final version
+### Logins
+#### mvp
+At present this only passes on known variables to the underlying system - so `slides=xxxx` gets passed down to the wsi-server, but not say `token=xxxx`. This seems to be the simplest security option as we can then use existing nginx code to validate every request to both this and the underlying wsi-service.
+
+#### final version
 We'd need to integrate the same login system to the viewer, and have it pass down auth to the tile server too.
 
 ## GUI
