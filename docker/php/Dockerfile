@@ -20,6 +20,7 @@ RUN apt-get update -y && apt-get install --no-install-recommends --fix-missing -
         s6 \
         locales \
         tzdata \
+        chromium-browser \
     && ln -fs /usr/share/zoneinfo/Europe/Prague /etc/localtime \
     && dpkg-reconfigure --frontend noninteractive tzdata \
     && apt clean \
