@@ -810,7 +810,7 @@ style="height: 22px; width: 60px;" onchange="${this.THIS}.context.freeFormTool.s
         }
     
         // Correct URL string with backticks for interpolation
-        const apiUrl = `http://optiplex01:5000/native_annotations/?slide_id=${slideId}`; 
+        const apiUrl = `http://optiplex01:8080/v3/annotations/native?slide=${slideId}`; 
     
         const _this = this;
         _this._ioArgs.format = _this.exportOptions.format; // Make sure format is set
